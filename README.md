@@ -23,7 +23,10 @@ It uses the official GitHub GraphQL endpoint.
 
 # Quick instructions to run the app
 
-- Edit the "Schema" of the app target; make sure to set the Personal Access token to the Environment Variable
+- If you don't have a personal access token;
+  - Go to [Tokens page](https://github.com/settings/tokens)
+  - Make sure to select the needed options [View Image](https://cln.sh/jOr3Bl)
+- Edit the "Schema" of the app target; make sure to set the Personal Access token to the Environment Variable. [Image example](https://cln.sh/KI8iYH)
 - Run the app; enjoy
 
 # Notes
