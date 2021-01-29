@@ -1,0 +1,29 @@
+query RepositoryIssues ($repositoryOwner:String!, $repositoryName:String!) {
+    repository(owner: $repositoryOwner, name: $repositoryName) {
+        openIssues:issues(last: 20, states: OPEN) {
+            nodes {
+                ...IssueSummary
+            }
+        }
+        closedIssues:issues(last: 20, states: CLOSED) {
+            nodes {
+                ...IssueSummary
+            }
+        }
+    }
+}
+
+fragment IssueSummary on Issue {
+    author {
+        ...IssueAuthor
+    }
+    title
+    number
+    createdAt
+    state
+}
+
+fragment IssueAuthor on Actor {
+    avatarUrl
+    login
+}

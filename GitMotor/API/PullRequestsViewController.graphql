@@ -1,0 +1,35 @@
+query RepositoryPullRequests ($repositoryOwner:String!, $repositoryName:String!) {
+    repository(owner: $repositoryOwner, name: $repositoryName) {
+        openPullRequests: pullRequests(first: 20, states: OPEN) {
+            nodes {
+                ...PullRequestSummary
+            }
+        }
+        mergedPullRequests: pullRequests(first: 20, states: MERGED) {
+            nodes {
+                ...PullRequestSummary
+            }
+        }
+        closedPullRequests: pullRequests(first: 20, states: CLOSED) {
+            nodes {
+                ...PullRequestSummary
+            }
+        }
+    }
+}
+
+fragment PullRequestSummary on PullRequest {
+    author {
+        ...PullRequestAuthor
+    }
+    title
+    number
+    createdAt
+    baseRefName
+    headRefName
+}
+
+fragment PullRequestAuthor on Actor {
+    avatarUrl
+    login
+}

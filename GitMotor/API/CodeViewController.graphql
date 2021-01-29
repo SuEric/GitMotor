@@ -1,0 +1,61 @@
+query RepositoryCommits ($repositoryOwner:String!, $repositoryName:String!) {
+    repository(owner: $repositoryOwner, name: $repositoryName) {
+        object(expression: "master") {
+            ... on Commit {
+                history(first: 20) {
+                    nodes {
+                        ...CommitSummary
+                    }
+                }
+            }
+        }
+    }
+}
+
+query RepositoryReleases ($repositoryOwner:String!, $repositoryName:String!) {
+    repository(owner: $repositoryOwner, name: $repositoryName) {
+        releases(first: 20) {
+            nodes {
+                ...ReleaseSummary
+            }
+        }
+    }
+}
+
+query RepositoryCollaborators ($repositoryOwner:String!, $repositoryName:String!) {
+    repository(owner: $repositoryOwner, name: $repositoryName) {
+        collaborators(first: 20) {
+            nodes {
+                ...AuthorInfo
+            }
+        }
+    }
+}
+
+fragment CommitSummary on Commit {
+    author {
+        ...AuthorSummary
+    }
+    abbreviatedOid
+    message
+    committedDate
+}
+
+fragment ReleaseSummary on Release {
+    name
+    author {
+        ...AuthorInfo
+    }
+    publishedAt
+}
+
+fragment AuthorSummary on GitActor {
+    avatarUrl
+    name
+}
+
+fragment AuthorInfo on User {
+    avatarUrl
+    name
+    email
+}

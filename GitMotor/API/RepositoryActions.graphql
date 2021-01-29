@@ -1,0 +1,43 @@
+mutation AddStarToRepository ($repositoryId: ID!) {
+    addStar(input: {
+            starrableId: $repositoryId
+            }) {
+        starrable {
+           ...RepositorySummary
+        }
+    }
+}
+
+mutation RemoveStarToRepository ($repositoryId: ID!) {
+    removeStar(input: {
+               starrableId: $repositoryId
+               }) {
+        starrable {
+            ...RepositorySummary
+        }
+    }
+}
+
+mutation WatchRepository ($repositoryId: ID!) {
+    updateSubscription(input: {
+                       state: SUBSCRIBED
+                       subscribableId: $repositoryId
+                       }) {
+        subscribable {
+            ...RepositorySummary
+        }
+    }
+}
+
+mutation UnwatchRepository ($repositoryId: ID!) {
+    updateSubscription(input: {
+                       state: IGNORED
+                       subscribableId: $repositoryId
+                       }) {
+        subscribable {
+            ...RepositorySummary
+        }
+    }
+}
+
+
